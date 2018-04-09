@@ -1,11 +1,10 @@
 Rails.application.routes.draw do
-  devise_for :users, controllers: {
-    sessions: 'users/sessions'
-  }
+  devise_for :users
 
   namespace :v1, defaults: { format: :json } do
     resources :groups
     resources :tables
+    resources :users, only: [:create]
     resource :sessions, only: [:create, :destroy]
 
     get '/tables/:table_id/lists', to: 'lists#index'
