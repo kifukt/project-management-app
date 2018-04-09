@@ -5,6 +5,7 @@ class CreateTables < ActiveRecord::Migration[5.1]
       t.string :name
       t.references :creator, polymorphic: true, index: true
       t.datetime :created_at, null: false
+      t.string :slug
     end
   end
 end

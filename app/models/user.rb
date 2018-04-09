@@ -6,10 +6,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :tables, as: :creator
-  has_many :lists
-  has_many :cards
-  has_many :comments
-  has_many :tasks_lists
-  has_many :tasks
+  has_many :lists, as: :creator
+  has_many :cards, as: :creator
+  has_many :comments, as: :creator
+  has_many :tasks_lists, as: :creator
+  has_many :tasks, as: :creator
   has_and_belongs_to_many :groups
 end

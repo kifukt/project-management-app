@@ -5,7 +5,7 @@ class CreateCards < ActiveRecord::Migration[5.1]
       t.integer :list_id
       t.string :title
       t.string :description
-      t.integer :created_by
+      t.references :creator, index: true, foreign_key: { to_table: :users } 
       t.integer :updated_by
       t.timestamps
     end
