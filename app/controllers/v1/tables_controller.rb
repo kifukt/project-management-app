@@ -14,7 +14,11 @@ class V1::TablesController < ApplicationController
   end
 
   def create
-    @table = current_user.tables.build(table_params)
+    if params[:table][:is_private] == true
+      @table = current_user.tables.build(table_params)
+    else
+      @table = current_user.groups.find(params[:group_id]).tables.build(table_params)
+    end
     @table.creator = current_user
     @table.save
     render :create, status: :created
@@ -35,7 +39,7 @@ class V1::TablesController < ApplicationController
   end
 
   def table_params
-    params.require(:table).permit(:name)
+    params.require(:table).permit(:name, :is_private)
   end
 
 end

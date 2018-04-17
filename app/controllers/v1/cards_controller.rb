@@ -15,11 +15,20 @@ class V1::CardsController < ApplicationController
   end
 
   def create
-    @card = current_user.tables.find(params[:table_id])
-            .lists.find(params[:list_id])
-            .cards.build(card_params)
+    if Table.find(params[:table_id]).is_private
+      @card = current_user.tables.find(params[:table_id])
+              .lists.find(params[:list_id])
+              .cards.build(card_params)
+    else
+      @card = current_user.groups.find(params[:group_id])
+              .tables.find(params[:table_id])
+              .lists.find(params[:list_id])
+              .cards.build(card_params)
+    end
     @card.creator = current_user
-    @card.save
+    if @card.save
+      CardMailer.new_card(@card)
+    end
     render :create, status: :created
   end
 
