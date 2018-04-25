@@ -1,5 +1,5 @@
 class V1::ListsController < ApplicationController
-  before_action :set_list, only: [:show, :destroy]
+  before_action :set_list, only: [:show, :destroy, :update]
 
   def index
     @lists = current_user.tables.find(params[:table_id]).lists
@@ -25,6 +25,14 @@ class V1::ListsController < ApplicationController
       head(:ok)
     else
       head(:unprocessable_entity)
+    end
+  end
+
+  def update
+    if @list.update(list_params)
+      render :update, status: :ok
+    else
+      head(:unauthorized)
     end
   end
 

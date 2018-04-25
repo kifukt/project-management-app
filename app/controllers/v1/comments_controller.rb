@@ -1,5 +1,5 @@
 class V1::CommentsController < ApplicationController
-  before_action :set_list, only: [:show, :destroy]
+  before_action :set_list, only: [:show, :destroy, :update]
 
   def index
     @comments = current_user.tables.find(params[:table_id])
@@ -31,6 +31,14 @@ class V1::CommentsController < ApplicationController
       head(:ok)
     else
       head(:unprocessable_entity)
+    end
+  end
+
+  def update
+    if @comment.update(comment_params)
+      render :update, status: :ok
+    else
+      head(:unauthorized)
     end
   end
 

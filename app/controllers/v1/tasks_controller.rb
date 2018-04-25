@@ -1,5 +1,5 @@
 class V1::TasksController < ApplicationController
-  before_action :set_list, only: [:show, :destroy]
+  before_action :set_list, only: [:show, :destroy, :update]
 
   def index
     @tasks = current_user.tables.find(params[:table_id])
@@ -33,6 +33,14 @@ class V1::TasksController < ApplicationController
       head(:ok)
     else
       head(:unprocessable_entity)
+    end
+  end
+
+  def update
+    if @task.update(task_params)
+      render :update, status: :ok
+    else
+      head(:unauthorized)
     end
   end
 

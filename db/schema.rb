@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180409211214) do
+ActiveRecord::Schema.define(version: 20180424155710) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20180409211214) do
     t.bigint "creator_id"
     t.datetime "created_at", null: false
     t.string "slug"
+    t.boolean "is_private"
     t.index ["creator_type", "creator_id"], name: "index_tables_on_creator_type_and_creator_id"
   end
 

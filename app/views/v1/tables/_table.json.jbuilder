@@ -1,5 +1,6 @@
 json.call(
   table,
   :id,
-  :name
+  :name,
+  :is_private
 )

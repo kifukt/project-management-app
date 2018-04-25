@@ -1,5 +1,5 @@
 class V1::TablesController < ApplicationController
-  before_action :set_table, only: [:show, :destroy]
+  before_action :set_table, only: [:show, :destroy, :update]
 
   def index
     @tables = current_user.tables
@@ -7,14 +7,11 @@ class V1::TablesController < ApplicationController
   end
 
   def show
-  end
-
-  def new
-    @table = Table.new
+    render :show, status: :ok
   end
 
   def create
-    if params[:table][:is_private] == true
+    if params[:table][:is_private] == "true"
       @table = current_user.tables.build(table_params)
     else
       @table = current_user.groups.find(params[:group_id]).tables.build(table_params)
@@ -32,6 +29,14 @@ class V1::TablesController < ApplicationController
     end
   end
 
+  def update
+    if @table.update(table_params)
+      render :update, status: :ok
+    else
+      head(:unauthorized)
+    end
+  end
+
   private
 
   def set_table
@@ -39,7 +44,7 @@ class V1::TablesController < ApplicationController
   end
 
   def table_params
-    params.require(:table).permit(:name, :is_private)
+    params.require(:table).permit(:is_private, :name)
   end
 
 end

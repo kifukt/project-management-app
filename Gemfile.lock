@@ -53,6 +53,8 @@ GEM
       warden (~> 1.2.3)
     erubi (1.7.1)
     erubis (2.7.0)
+    faker (1.8.7)
+      i18n (>= 0.7)
     ffi (1.9.23)
     friendly_id (5.1.0)
       activerecord (>= 4.0.0)
@@ -174,6 +176,7 @@ PLATFORMS
 DEPENDENCIES
   byebug
   devise
+  faker
   friendly_id (~> 5.1.0)
   haml-rails
   jbuilder (~> 2.5)

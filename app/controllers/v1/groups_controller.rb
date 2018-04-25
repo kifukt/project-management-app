@@ -1,7 +1,7 @@
 class V1::GroupsController < ApplicationController
   before_action :set_group, only: [:destroy, :show, :change_leader,
                                    :add_user_to_group, :show_group_users,
-                                   :remove_user_from_group]
+                                   :remove_user_from_group, :update]
 
   def index
     @groups = current_user.groups
