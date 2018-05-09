@@ -2,9 +2,12 @@ class V1::CardsController < ApplicationController
   before_action :set_cards, only: [:show, :destroy, :update]
 
   def index
-    @cards = current_user.tables.find(params[:table_id])
-             .lists.find(params[:list_id]).cards
-    render :index, status: :ok
+    if List.find(params[:list_id]).table.user == current_user
+      @cards = Lists.find(params[:list_id]).cards
+      render :index, status: :ok
+    else
+      head(:forbidden)
+    end
   end
 
   def show
