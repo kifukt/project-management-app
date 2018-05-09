@@ -3,6 +3,5 @@
 one:
   table_id: 1
   name: 'test name'
-  is_private: false
+  table_id: 1
   creator_id: 1
-  creator_type: 'User'
